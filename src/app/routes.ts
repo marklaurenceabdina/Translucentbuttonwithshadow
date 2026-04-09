@@ -1,5 +1,4 @@
 import { createBrowserRouter } from "react-router";
-import React from "react";
 import { AuthPage } from "./components/auth/AuthPage";
 import { MobileLayout } from "./components/layout/MobileLayout";
 import { HomePage } from "./components/home/HomePage";
@@ -10,18 +9,15 @@ import { CommunityPage } from "./components/community/CommunityPage";
 import { WishlistPage } from "./components/wishlist/WishlistPage";
 import { ProfilePage } from "./components/profile/ProfilePage";
 import { MyReviewsPage } from "./components/profile/MyReviewsPage";
-import { ErrorPage } from "./components/ErrorPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: AuthPage,
-    errorElement: React.createElement(ErrorPage),
   },
   {
     path: "/app",
     Component: MobileLayout,
-    errorElement: React.createElement(ErrorPage),
     children: [
       { index: true, Component: HomePage },
       { path: "discover", Component: DiscoverPage },

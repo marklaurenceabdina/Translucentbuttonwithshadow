@@ -1,5 +1,5 @@
 import { RouterProvider } from "react-router";
-import { router } from "./routes.tsx";
+import { router } from "./routes";
 import { AppProvider, useApp } from "./context/AppContext";
 
 function PhoneShell() {
@@ -7,33 +7,33 @@ function PhoneShell() {
 
   const themeVars = darkMode
     ? {
-      "--spwn-bg": "#08080f",
-      "--spwn-card": "#0e0e1c",
-      "--spwn-input": "#141425",
-      "--spwn-border": "rgba(255,255,255,0.07)",
-      "--spwn-border-s": "rgba(255,255,255,0.13)",
-      "--spwn-text": "#ffffff",
-      "--spwn-muted": "rgba(255,255,255,0.55)",
-      "--spwn-faint": "rgba(255,255,255,0.32)",
-      "--spwn-fainter": "rgba(255,255,255,0.18)",
-      "--spwn-accent": "#00aaff",
-      "--spwn-nav": "rgba(8,8,15,0.98)",
-      "--spwn-glass": "rgba(255,255,255,0.06)",
-    }
+        "--spwn-bg": "#08080f",
+        "--spwn-card": "#0e0e1c",
+        "--spwn-input": "#141425",
+        "--spwn-border": "rgba(255,255,255,0.07)",
+        "--spwn-border-s": "rgba(255,255,255,0.13)",
+        "--spwn-text": "#ffffff",
+        "--spwn-muted": "rgba(255,255,255,0.55)",
+        "--spwn-faint": "rgba(255,255,255,0.32)",
+        "--spwn-fainter": "rgba(255,255,255,0.18)",
+        "--spwn-accent": "#00aaff",
+        "--spwn-nav": "rgba(8,8,15,0.98)",
+        "--spwn-glass": "rgba(255,255,255,0.06)",
+      }
     : {
-      "--spwn-bg": "#eef2f9",
-      "--spwn-card": "#ffffff",
-      "--spwn-input": "#f3f6fb",
-      "--spwn-border": "rgba(0,0,0,0.07)",
-      "--spwn-border-s": "rgba(0,0,0,0.12)",
-      "--spwn-text": "#0d1117",
-      "--spwn-muted": "rgba(13,17,23,0.55)",
-      "--spwn-faint": "rgba(13,17,23,0.38)",
-      "--spwn-fainter": "rgba(13,17,23,0.22)",
-      "--spwn-accent": "#0088dd",
-      "--spwn-nav": "rgba(238,242,249,0.98)",
-      "--spwn-glass": "rgba(0,0,0,0.04)",
-    };
+        "--spwn-bg": "#eef2f9",
+        "--spwn-card": "#ffffff",
+        "--spwn-input": "#f3f6fb",
+        "--spwn-border": "rgba(0,0,0,0.07)",
+        "--spwn-border-s": "rgba(0,0,0,0.12)",
+        "--spwn-text": "#0d1117",
+        "--spwn-muted": "rgba(13,17,23,0.55)",
+        "--spwn-faint": "rgba(13,17,23,0.38)",
+        "--spwn-fainter": "rgba(13,17,23,0.22)",
+        "--spwn-accent": "#0088dd",
+        "--spwn-nav": "rgba(238,242,249,0.98)",
+        "--spwn-glass": "rgba(0,0,0,0.04)",
+      };
 
   return (
     <div

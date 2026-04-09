@@ -24,7 +24,6 @@ interface AppState {
   user: User | null;
   darkMode: boolean;
   backlog: Backlog;
-  wishlist: Set<string>;
   reviews: Review[];
   userRatings: Record<string, number>;
   toggleDarkMode: () => void;
@@ -35,9 +34,6 @@ interface AppState {
   removeFromBacklog: (gameId: string) => void;
   getBacklogStatus: (gameId: string) => BacklogStatus | null;
   isInBacklog: (gameId: string) => boolean;
-  addToWishlist: (gameId: string) => void;
-  removeFromWishlist: (gameId: string) => void;
-  isInWishlist: (gameId: string) => boolean;
   addReview: (gameId: string, rating: number, text: string) => void;
   editReview: (reviewId: string, rating: number, text: string) => void;
   getReviewsForGame: (gameId: string) => Review[];
@@ -60,24 +56,19 @@ function loadFromStorage<T>(key: string, fallback: T): T {
 function saveToStorage(key: string, value: unknown) {
   try {
     localStorage.setItem(key, JSON.stringify(value));
-  } catch { }
+  } catch {}
 }
 
 export function AppProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(() => loadFromStorage("spwn_user", null));
   const [darkMode, setDarkMode] = useState<boolean>(() => loadFromStorage("spwn_dark", true));
   const [backlog, setBacklog] = useState<Backlog>(() => loadFromStorage("spwn_backlog", {}));
-  const [wishlist, setWishlist] = useState<Set<string>>(() => {
-    const stored = loadFromStorage<string[]>("spwn_wishlist", []);
-    return new Set(stored);
-  });
   const [reviews, setReviews] = useState<Review[]>(() => loadFromStorage("spwn_reviews", SEED_REVIEWS));
   const [userRatings, setUserRatings] = useState<Record<string, number>>(() => loadFromStorage("spwn_ratings", {}));
 
   useEffect(() => saveToStorage("spwn_user", user), [user]);
   useEffect(() => saveToStorage("spwn_dark", darkMode), [darkMode]);
   useEffect(() => saveToStorage("spwn_backlog", backlog), [backlog]);
-  useEffect(() => saveToStorage("spwn_wishlist", Array.from(wishlist)), [wishlist]);
   useEffect(() => saveToStorage("spwn_reviews", reviews), [reviews]);
   useEffect(() => saveToStorage("spwn_ratings", userRatings), [userRatings]);
 
@@ -121,22 +112,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   function isInBacklog(gameId: string): boolean {
     return gameId in backlog;
-  }
-
-  function addToWishlist(gameId: string) {
-    setWishlist((prev) => new Set([...prev, gameId]));
-  }
-
-  function removeFromWishlist(gameId: string) {
-    setWishlist((prev) => {
-      const next = new Set(prev);
-      next.delete(gameId);
-      return next;
-    });
-  }
-
-  function isInWishlist(gameId: string): boolean {
-    return wishlist.has(gameId);
   }
 
   function addReview(gameId: string, rating: number, text: string) {
@@ -191,7 +166,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
         user,
         darkMode,
         backlog,
-        wishlist,
         reviews,
         userRatings,
         toggleDarkMode,
@@ -202,9 +176,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
         removeFromBacklog,
         getBacklogStatus,
         isInBacklog,
-        addToWishlist,
-        removeFromWishlist,
-        isInWishlist,
         addReview,
         editReview,
         getReviewsForGame,
