@@ -1,5 +1,4 @@
 import { createBrowserRouter } from "react-router";
-import React from "react";
 import { AuthPage } from "./components/auth/AuthPage";
 import { MobileLayout } from "./components/layout/MobileLayout";
 import { HomePage } from "./components/home/HomePage";
@@ -16,12 +15,12 @@ export const router = createBrowserRouter([
   {
     path: "/",
     Component: AuthPage,
-    errorElement: React.createElement(ErrorPage),
+    errorElement: <ErrorPage />,
   },
   {
     path: "/app",
     Component: MobileLayout,
-    errorElement: React.createElement(ErrorPage),
+    errorElement: <ErrorPage />,
     children: [
       { index: true, Component: HomePage },
       { path: "discover", Component: DiscoverPage },
